@@ -46,12 +46,12 @@
       <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
         <a href="#" class="dropdown-item py-3">
             <div class="text-start">
-              <h3 class="dropdown-item-title fs-5 fw-bold">Abu Motaleb</h3>
-              <p class="text-muted">abumotaleb</p>
+              <h3 class="dropdown-item-title fs-5 fw-bold">{{ Auth::guard('admin')->user()->name }}</h3>
+              <p class="text-muted">{{ Auth::guard('admin')->user()->username }}</p>
             </div>
         </a>
         <div class="dropdown-divider"></div>
-        <a href="" class="dropdown-item text-start">
+        <a href="{{ route('admin.logout') }}" class="dropdown-item text-start">
           Logout
         </a>
       </div>

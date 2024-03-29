@@ -5,8 +5,9 @@ use App\Http\Controllers\Admin\Auth\AuthController;
 use App\Http\Controllers\Admin\DashboardController;
 
 // Admin Auth Route
+Route::redirect('/', '/login');
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('admin.login.form');
-Route::post('/login', [AuthController::class, 'login'])->name('admin.login');
+Route::post('/login', [AuthController::class, 'adminLogin'])->name('admin.login');
 Route::get('/password/forget', [AuthController::class, 'showForgetPasswordForm'])->name('admin.forget.password.form');
 Route::post('/password/forget', [AuthController::class, 'sendResetPasswordEmail'])->name('admin.forget.password');
 Route::get('/password/reset', [AuthController::class, 'showResetPasswordForm'])->name('admin.reset.password.form');
