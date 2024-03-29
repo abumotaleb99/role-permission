@@ -1,3 +1,13 @@
+<style>
+.dropdown-menu-lg {
+  max-width: 200px;
+  min-width: 200px;
+}
+.dropdown-item-title {
+  font-size: 20px;
+  font-weight: bold;
+}
+</style>
 <nav class="main-header navbar navbar-expand navbar-white navbar-light">
   <!-- Left navbar links -->
   <ul class="navbar-nav">
@@ -35,12 +45,13 @@
       </a>
       <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
         <a href="#" class="dropdown-item py-3">
-            <div class="text-center">
-              <h3 class="dropdown-item-title">Abu Motaleb</h3>
+            <div class="text-start">
+              <h3 class="dropdown-item-title fs-5 fw-bold">Abu Motaleb</h3>
+              <p class="text-muted">abumotaleb</p>
             </div>
         </a>
         <div class="dropdown-divider"></div>
-        <a href="" class="dropdown-item text-center">
+        <a href="" class="dropdown-item text-start">
           Logout
         </a>
       </div>

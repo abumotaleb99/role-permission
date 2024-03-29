@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\Auth\AuthController;
 use App\Http\Controllers\Admin\DashboardController;
 
+// Admin Auth Route
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('admin.login.form');
 Route::post('/login', [AuthController::class, 'login'])->name('admin.login');
 Route::get('/password/forget', [AuthController::class, 'showForgetPasswordForm'])->name('admin.forget.password.form');
