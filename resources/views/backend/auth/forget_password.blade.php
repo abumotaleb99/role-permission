@@ -4,15 +4,20 @@
   <div class="login-box">
     <div class="card card-primary">
       <div class="card-body">
-        <p class="login-box-msg">Enter Your Email to Reset Your Password</p>
-        <form action="recover-password.html" method="post">
-          <div class="input-group mb-3">
-            <input type="email" class="form-control" placeholder="Email">
-            <div class="input-group-append">
-              <div class="input-group-text">
-                <span class="fas fa-envelope"></span>
+        <h5 class="login-box-msg" style="font-weight: bold;">Enter Your Email to Reset Your Password</h5>
+        @include('backend.message')
+        <form action="{{ route('admin.forget.password') }}" method="post">
+          @csrf
+          <div class="mb-3">
+            <div class="input-group">
+              <input type="email" name="email" class="form-control" value="{{ old('email') }}" placeholder="Email">
+              <div class="input-group-append">
+                <div class="input-group-text">
+                  <span class="fas fa-envelope"></span>
+                </div>
               </div>
             </div>
+            <span class="text-danger">{{ $errors->has('email') ? $errors->first('email') : "" }}</span>
           </div>
           <div class="row">
             <div class="col-12">

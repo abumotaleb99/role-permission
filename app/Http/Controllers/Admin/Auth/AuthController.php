@@ -4,7 +4,13 @@ namespace App\Http\Controllers\Admin\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Admin; 
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rule;
+use Mail;
+use Str;
+use App\Mail\ForgetPasswordMail;
+use Hash;
 
 class AuthController extends Controller
 {
@@ -36,15 +42,47 @@ class AuthController extends Controller
     }
 
     public function sendResetPasswordEmail(Request $request) {
-        return $request->all();
+        $request->validate([
+            'email' => ['required', 'email', 'max:255', Rule::exists(Admin::class, 'email')],
+        ]);
+
+        $admin = Admin::where('email', '=', $request->email)->first();
+
+        if(!empty($admin)) {
+            $admin->remember_token = Str::random(30);
+            $admin->save();
+
+            Mail::to($admin->email)->send(new ForgetPasswordMail($admin));
+
+            return redirect()->back()->with("success", "Password reset link sent successfully. Please check your email.");
+
+        }else {
+            return redirect()->back()->with("error", "This email doesn't exist. Enter a different email.");
+        }
     }
 
-    public function showResetPasswordForm() {
-        return view('backend.auth.reset_password');
+    public function showResetPasswordForm($token) {
+        $admin = Admin::where('remember_token', '=', $token)->first();
+
+        if(!empty($admin)) {
+            return view('backend.auth.reset_password');
+        }else {
+            abort(404);
+        }
     }
 
-    public function resetPassword(Request $request) {
-        return $request->all();
+    public function resetPassword(Request $request, $token) {
+        $request->validate([
+            'password' => 'required|confirmed|min:8|max:20',
+        ]);
+
+        $admin = Admin::where('remember_token', '=', $token)->first();
+
+        $admin->password = Hash::make($request->password);
+        $admin->remember_token = Str::random(30);
+        $admin->save();
+
+        return redirect(url('/login'))->with("success", "Your password has been changed successfully.");
     }
 
     public function logout() {
