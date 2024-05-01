@@ -31,6 +31,12 @@ class AuthController extends Controller
         $remember = !empty($request->remember) ? true : false;
 
         if(Auth::guard("admin")->attempt(['email' => $request->email, 'password' => $request->password], $remember)) {
+            $admin = Auth::guard('admin')->user();
+            if ($admin->status === 1) {
+                Auth::guard('admin')->logout();
+                return redirect()->back()->with('error', 'Your account has been banned.');
+            }
+    
             return redirect('admin/dashboard');
         }else {
             return redirect()->back()->with('error', 'Incorrect email or password.');
