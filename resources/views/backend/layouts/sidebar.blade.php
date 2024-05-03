@@ -15,6 +15,14 @@
           </a>
         </li>
         <li class="nav-item">
+          <a href="{{ route('admin.roles.index') }}" class="nav-link  @if(Request::segment(2) == 'roles') active @endif">
+            <i class="nav-icon fas fa-cogs"></i>
+            <p>
+              Roles & Permissions
+            </p>
+          </a>
+        </li>
+        <li class="nav-item">
           <a href="{{ route('admin.admins.index') }}" class="nav-link  @if(Request::segment(2) == 'admins') active @endif">
             <i class="nav-icon fas fa-users"></i>
             <p>

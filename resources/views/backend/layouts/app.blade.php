@@ -14,41 +14,46 @@
   <link rel="stylesheet" href="{{ asset('assets/backend') }}/dist/css/adminlte.min.css">
 </head>
 <body class="hold-transition sidebar-mini">
-<div class="wrapper">
-  <!-- Navbar -->
-  @if(!request()->routeIs('admin.login.form') && !request()->routeIs('admin.forget.password.form') && !request()->routeIs('admin.reset.password.form'))
-    @include('backend.layouts.header')
-  @endif
+  <div class="wrapper">
+    <!-- Navbar -->
+    @if(!request()->routeIs('admin.login.form') && !request()->routeIs('admin.forget.password.form') && !request()->routeIs('admin.reset.password.form'))
+      @include('backend.layouts.header')
+    @endif
 
-  <!-- Sidebar -->
-  @if(!request()->routeIs('admin.login.form') && !request()->routeIs('admin.forget.password.form') && !request()->routeIs('admin.reset.password.form'))
-    @include('backend.layouts.sidebar')
-  @endif
+    <!-- Sidebar -->
+    @if(!request()->routeIs('admin.login.form') && !request()->routeIs('admin.forget.password.form') && !request()->routeIs('admin.reset.password.form'))
+      @include('backend.layouts.sidebar')
+    @endif
 
-  @yield('content')
+    @yield('content')
 
-  <!-- Main Footer -->
-  @if(!request()->routeIs('admin.login.form') && !request()->routeIs('admin.forget.password.form') && !request()->routeIs('admin.reset.password.form'))
-    @include('backend.layouts.footer')
-  @endif
-</div>
-<!-- REQUIRED SCRIPTS -->
-<!-- jQuery -->
-<script src="{{ asset('assets/backend') }}/plugins/jquery/jquery.min.js"></script>
-<script src="{{ asset('assets/backend') }}/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-<!-- DataTables  & Plugins -->
-<script src="{{ asset('assets/backend') }}/plugins/datatables/jquery.dataTables.min.js"></script>
-<script src="{{ asset('assets/backend') }}/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
-<script src="{{ asset('assets/backend') }}/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
-<script src="{{ asset('assets/backend') }}/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
-<!-- AdminLTE App -->
-<script src="{{ asset('assets/backend') }}/dist/js/adminlte.min.js"></script>
-<script>
-  $(function () {
-    $("#dataTable").DataTable({
-      "responsive": true, "lengthChange": false, "autoWidth": false,
+    <!-- Main Footer -->
+    @if(!request()->routeIs('admin.login.form') && !request()->routeIs('admin.forget.password.form') && !request()->routeIs('admin.reset.password.form'))
+      @include('backend.layouts.footer')
+    @endif
+  </div>
+  <!-- REQUIRED SCRIPTS -->
+  <!-- jQuery -->
+  <script src="{{ asset('assets/backend') }}/plugins/jquery/jquery.min.js"></script>
+  <script src="{{ asset('assets/backend') }}/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <!-- DataTables  & Plugins -->
+  <script src="{{ asset('assets/backend') }}/plugins/datatables/jquery.dataTables.min.js"></script>
+  <script src="{{ asset('assets/backend') }}/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+  <script src="{{ asset('assets/backend') }}/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+  <script src="{{ asset('assets/backend') }}/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+  <!-- AdminLTE App -->
+  <script src="{{ asset('assets/backend') }}/dist/js/adminlte.min.js"></script>
+
+  <script>
+    $(function () {
+      $("#dataTable").DataTable({
+        "responsive": true, "lengthChange": false, "autoWidth": false,
+      });
     });
-  });
-</script>
+
+  </script>
+  
+  @yield('scripts')
+
 </body>
 </html>
