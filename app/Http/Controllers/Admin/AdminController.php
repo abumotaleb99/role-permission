@@ -31,7 +31,7 @@ class AdminController extends Controller
 
     public function add() {
         if (is_null($this->user) || !$this->user->can('admin.create')) {
-            abort(403, 'Access Denied: You do not have permission to create new admin accounts.');
+            return back()->with('error', 'Access Denied: You do not have permission to create new admin accounts.');
         }
 
         $data['headerTitle'] = 'Add New Admin';
@@ -68,7 +68,7 @@ class AdminController extends Controller
 
     public function edit($id) {
         if (is_null($this->user) || !$this->user->can('admin.edit')) {
-            abort(403, 'Access Denied: You do not have permission to edit admin accounts.');
+            return back()->with('error', 'Access Denied: You do not have permission to edit admin accounts.');
         }
 
         $data['admin'] = Admin::find($id);
@@ -85,7 +85,7 @@ class AdminController extends Controller
 
     public function update(Request $request) {
         if (is_null($this->user) || !$this->user->can('admin.edit')) {
-            abort(403, 'Access Denied: You do not have permission to edit admin accounts.');
+            return back()->with('error', 'Access Denied: You do not have permission to edit admin accounts.');
         }
 
         $admin = Admin::find($request->admin_id);
@@ -117,7 +117,7 @@ class AdminController extends Controller
     public function delete($id)
     {
         if (is_null($this->user) || !$this->user->can('admin.delete')) {
-            abort(403, 'Access Denied: You do not have permission to delete admin accounts.');
+            return back()->with('error', 'Access Denied: You do not have permission to delete admin accounts.');
         }
 
         $admin = Admin::find($id);

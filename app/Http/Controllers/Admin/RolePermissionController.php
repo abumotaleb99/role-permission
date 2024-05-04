@@ -32,7 +32,7 @@ class RolePermissionController extends Controller
 
     public function add() {
         if (is_null($this->user) || !$this->user->can('role.create')) {
-            abort(403, 'Access Denied: You do not have permission to to create new roles.');
+            return back()->with('error', 'Access Denied: You do not have permission to create new roles.');
         }
 
         $data['headerTitle'] = 'Add New Role';
@@ -44,7 +44,7 @@ class RolePermissionController extends Controller
 
     public function insert(Request $request) {
         if (is_null($this->user) || !$this->user->can('role.create')) {
-            abort(403, 'Access Denied: You do not have permission to to create new roles.');
+            return back()->with('error', 'Access Denied: You do not have permission to create new roles.');
         }
 
         $request->validate([
@@ -63,7 +63,7 @@ class RolePermissionController extends Controller
 
     public function edit($id) {
         if (is_null($this->user) || !$this->user->can('role.edit')) {
-            abort(403, 'Access Denied: You do not have permission to to edit roles.');
+            return back()->with('error', 'Access Denied: You do not have permission to edit roles.');
         }
 
         $data['role'] = Role::find($id);
@@ -81,7 +81,7 @@ class RolePermissionController extends Controller
 
     public function update(Request $request) {
         if (is_null($this->user) || !$this->user->can('role.edit')) {
-            abort(403, 'Access Denied: You do not have permission to to edit roles.');
+            return back()->with('error', 'Access Denied: You do not have permission to to edit roles.');
         }
 
         $request->validate([
@@ -103,7 +103,7 @@ class RolePermissionController extends Controller
     public function delete($id)
     {
         if (is_null($this->user) || !$this->user->can('role.delete')) {
-            abort(403, 'Access Denied: You do not have permission to to delete roles.');
+            return back()->with('error', 'Access Denied: You do not have permission to to delete roles.');
         }
 
         $role = Role::find($id);
