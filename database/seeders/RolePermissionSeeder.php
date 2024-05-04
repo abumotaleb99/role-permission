@@ -30,11 +30,19 @@ class RolePermissionSeeder extends Seeder
                 ]
             ],
             [
+                'group_name' => "role",
+                'permissions' => [
+                    'role.view',
+                    'role.create',
+                    'role.edit',
+                    'role.delete',
+                ]
+            ],
+            [
                 'group_name' => "admin",
                 'permissions' => [
-                    'admin.index',
-                    'admin.add',
-                    'admin.insert',
+                    'admin.view',
+                    'admin.create',
                     'admin.edit',
                     'admin.delete',
                 ]
@@ -42,9 +50,8 @@ class RolePermissionSeeder extends Seeder
             [
                 'group_name' => "blog",
                 'permissions' => [
-                    'blog.index',
-                    'blog.add',
-                    'blog.insert',
+                    'blog.view',
+                    'blog.create',
                     'blog.edit',
                     'blog.delete',
                 ]
@@ -66,6 +73,15 @@ class RolePermissionSeeder extends Seeder
                 $superAdminRole->givePermissionTo($permission);
                 $permission->assignRole($superAdminRole);
             }
+        }
+
+        
+        $admin = Admin::where('username', 'abumotaleb')
+                        ->orWhere('email', 'abumotaleb1111@gmail.com')
+                        ->first();
+
+        if ($admin) {
+            $admin->assignRole($superAdminRole);
         }
 
     }

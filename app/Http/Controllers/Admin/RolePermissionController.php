@@ -8,10 +8,22 @@ use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 use Illuminate\Validation\Rule;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class RolePermissionController extends Controller
 {
+    protected $user;
+
+    public function __construct()
+    {
+        $this->user = Auth::guard('admin')->user();
+    }
+
     public function index() {
+        if (is_null($this->user) || !$this->user->can('role.view')) {
+            abort(403, 'Access Denied: You do not have permission to view roles.');
+        }
+
         $data['headerTitle'] = 'Role List';
         $data['roles'] = Role::get();
 
@@ -19,6 +31,10 @@ class RolePermissionController extends Controller
     }
 
     public function add() {
+        if (is_null($this->user) || !$this->user->can('role.create')) {
+            abort(403, 'Access Denied: You do not have permission to to create new roles.');
+        }
+
         $data['headerTitle'] = 'Add New Role';
         $data['allPermissions'] = Permission::get();
         $data['permissionGroups'] = User::getPermissionGroups();
@@ -27,6 +43,10 @@ class RolePermissionController extends Controller
     }
 
     public function insert(Request $request) {
+        if (is_null($this->user) || !$this->user->can('role.create')) {
+            abort(403, 'Access Denied: You do not have permission to to create new roles.');
+        }
+
         $request->validate([
             'name' => ['required', 'max:255', Rule::unique('roles', 'name')],
         ]);
@@ -42,6 +62,10 @@ class RolePermissionController extends Controller
     }
 
     public function edit($id) {
+        if (is_null($this->user) || !$this->user->can('role.edit')) {
+            abort(403, 'Access Denied: You do not have permission to to edit roles.');
+        }
+
         $data['role'] = Role::find($id);
         $data['allPermissions'] = Permission::get();
         $data['permissionGroups'] = User::getPermissionGroups();
@@ -56,6 +80,10 @@ class RolePermissionController extends Controller
     }
 
     public function update(Request $request) {
+        if (is_null($this->user) || !$this->user->can('role.edit')) {
+            abort(403, 'Access Denied: You do not have permission to to edit roles.');
+        }
+
         $request->validate([
             'name' => 'required|max:100|unique:roles,name,' . $request->role_id
         ]);
@@ -74,6 +102,10 @@ class RolePermissionController extends Controller
 
     public function delete($id)
     {
+        if (is_null($this->user) || !$this->user->can('role.delete')) {
+            abort(403, 'Access Denied: You do not have permission to to delete roles.');
+        }
+
         $role = Role::find($id);
 
         if (empty($role)) {

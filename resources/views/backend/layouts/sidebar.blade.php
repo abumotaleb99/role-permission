@@ -1,3 +1,7 @@
+@php
+  $user = Auth::guard('admin')->user();
+@endphp
+
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
   <a href="" class="brand-link">
     <span class="brand-text font-weight-light">Role & Permission</span>
@@ -6,6 +10,8 @@
     <!-- Sidebar Menu -->
     <nav class="mt-2">
       <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+
+        @if ($user->can('dashboard.view'))
         <li class="nav-item">
           <a href="{{ route('admin.dashboard') }}" class="nav-link  @if(Request::segment(2) == 'dashboard') active @endif">
             <i class="nav-icon fas fa-tachometer-alt"></i>
@@ -14,6 +20,9 @@
             </p>
           </a>
         </li>
+        @endif
+
+        @if ($user->can('role.view'))
         <li class="nav-item">
           <a href="{{ route('admin.roles.index') }}" class="nav-link  @if(Request::segment(2) == 'roles') active @endif">
             <i class="nav-icon fas fa-cogs"></i>
@@ -22,6 +31,9 @@
             </p>
           </a>
         </li>
+        @endif
+        
+        @if ($user->can('admin.view'))
         <li class="nav-item">
           <a href="{{ route('admin.admins.index') }}" class="nav-link  @if(Request::segment(2) == 'admins') active @endif">
             <i class="nav-icon fas fa-users"></i>
@@ -30,6 +42,8 @@
             </p>
           </a>
         </li>
+        @endif
+
         {{-- <li class="nav-item menu-open">
           <a href="#" class="nav-link active">
             <i class="nav-icon fas fa-users"></i>
