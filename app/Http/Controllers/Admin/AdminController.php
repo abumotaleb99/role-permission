@@ -5,6 +5,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Admin;
 use Illuminate\Validation\Rule;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 
 class AdminController extends Controller
 {
@@ -17,6 +19,7 @@ class AdminController extends Controller
 
     public function add() {
         $data['headerTitle'] = 'Add New Admin';
+        $data['roles']  = Role::all();
 
         return view('backend.admin.admin.add', $data);
     }
@@ -36,6 +39,10 @@ class AdminController extends Controller
         $admin->password = bcrypt($request->password);
         $admin->save();
 
+        if ($request->roles) {
+            $admin->assignRole($request->roles);
+        }
+
         return redirect('admin/admins')->with("success", "Admin successfully added.");
     }
 
@@ -44,6 +51,7 @@ class AdminController extends Controller
 
         if(!empty($data['admin'])) {
             $data['headerTitle'] = 'Edit Admin';
+            $data['roles']  = Role::all();
 
             return view('backend.admin.admin.edit', $data);
         }else {
@@ -69,6 +77,11 @@ class AdminController extends Controller
         $admin->name = $request->name;
         $admin->status = $request->status;
         $admin->save();
+
+        $admin->roles()->detach();
+        if ($request->roles) {
+            $admin->assignRole($request->roles);
+        }
 
         return redirect('admin/admins')->with("success", "Admin successfully updated.");
     }

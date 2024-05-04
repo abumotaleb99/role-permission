@@ -36,6 +36,14 @@
                     <span class="text-danger">{{ $errors->has('email') ? $errors->first('email') : "" }}</span>
                   </div>
                   <div class="form-group">
+                    <label>Assign Role</label>
+                    <select class="select2" multiple="multiple" data-placeholder="Select a State" name="roles[]" style="width: 100%;">
+                      @foreach ($roles as $role)
+                        <option value="{{ $role->name }}">{{ $role->name }}</option>
+                      @endforeach
+                    </select>
+                  </div>
+                  <div class="form-group">
                     <label>Password</label>
                     <input type="password" class="form-control" name="password" value="{{ old('password') }}" placeholder="Password">
                     <span class="text-danger">{{ $errors->has('password') ? $errors->first('password') : "" }}</span>

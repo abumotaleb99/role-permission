@@ -31,7 +31,7 @@ class RolePermissionController extends Controller
             'name' => ['required', 'max:255', Rule::unique('roles', 'name')],
         ]);
 
-        $role = Role::create(['name' => $request->name]);
+        $role = Role::create(['name' => $request->name, 'guard_name' => 'admin']);
 
         $permissions = $request->input('permissions');
         if(!empty($permissions)) {

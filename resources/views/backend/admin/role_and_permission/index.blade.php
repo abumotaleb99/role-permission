@@ -41,7 +41,6 @@
                       <td>{{ $role->name }}</td>
                       <td>
                         @foreach ($role->permissions as $permission)
-                          
                           <span class="badge badge-success">{{$permission->name}}</span>
                         @endforeach
                       </td>

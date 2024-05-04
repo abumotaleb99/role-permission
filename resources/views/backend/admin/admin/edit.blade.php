@@ -32,6 +32,14 @@
                     <span class="text-danger">{{ $errors->has('name') ? $errors->first('name') : "" }}</span>
                   </div>
                   <div class="form-group">
+                    <label>Assign Role</label>
+                    <select class="select2" multiple="multiple" data-placeholder="Select a State" name="roles[]" style="width: 100%;">
+                      @foreach ($roles as $role)
+                        <option value="{{ $role->name }}" {{ $admin->hasRole($role->name) ? 'selected' : '' }}>{{ $role->name }}</option>
+                      @endforeach
+                    </select>
+                  </div>
+                  <div class="form-group">
                     <label>Status</label>
                     <select name="status" class="form-control">
                       <option value="0" @if($admin->status == '0') selected @endif>Active</option>

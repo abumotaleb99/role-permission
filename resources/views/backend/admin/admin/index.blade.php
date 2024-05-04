@@ -29,8 +29,9 @@
                       <th>Username</th>
                       <th>Name</th>
                       <th>Email</th>
-                      <th>Created Date</th>
+                      <th>Roles</th>
                       <th>Status</th>
+                      <th>Created Date</th>
                       <th>Action</th>
                     </tr>
                   </thead>
@@ -44,6 +45,11 @@
                       <td>{{ $admin->username }}</td>
                       <td>{{ $admin->name }}</td>
                       <td>{{ $admin->email }}</td>
+                      <td>
+                        @foreach ($admin->roles as $role)
+                          <span class="badge badge-success">{{$role->name}}</span>
+                        @endforeach
+                      </td>
                       <td>{{ date('d-m-Y H:i A', strtotime($admin->created_at)) }}</td>
                       <td>
                         @if($admin->status == 0)
