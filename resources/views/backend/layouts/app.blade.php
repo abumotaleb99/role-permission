@@ -23,7 +23,7 @@
         !request()->routeIs('admin.forget.password.form') && 
         !request()->routeIs('admin.reset.password.form') && 
         !request()->routeIs('user.register.form') &&
-        !request()->routeIs('user.login')
+        !request()->routeIs('user.login.form')
     )
         @include('backend.layouts.header')
     @endif

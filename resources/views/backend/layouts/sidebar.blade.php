@@ -22,17 +22,6 @@
         </li>
         @endif
 
-        @if ($admin && $admin->can('role.view'))
-        <li class="nav-item">
-          <a href="{{ route('admin.roles.index') }}" class="nav-link  @if(Request::segment(2) == 'roles') active @endif">
-            <i class="nav-icon fas fa-cogs"></i>
-            <p>
-              Roles & Permissions
-            </p>
-          </a>
-        </li>
-        @endif
-        
         @if ($admin && $admin->can('admin.view'))
         <li class="nav-item">
           <a href="{{ route('admin.admins.index') }}" class="nav-link  @if(Request::segment(2) == 'admins') active @endif">
@@ -44,6 +33,28 @@
         </li>
         @endif
 
+        @if ($admin && $admin->can('admin.view'))
+        <li class="nav-item">
+          <a href="{{ route('admin.tickets.index') }}" class="nav-link  @if(Request::segment(2) == 'tickets') active @endif">
+            <i class="nav-icon fas fa-ticket-alt"></i>
+            <p>
+              Tickets
+            </p>
+          </a>
+        </li>
+        @endif
+
+        @if ($admin && $admin->can('role.view'))
+        <li class="nav-item">
+          <a href="{{ route('admin.roles.index') }}" class="nav-link  @if(Request::segment(2) == 'roles') active @endif">
+            <i class="nav-icon fas fa-cogs"></i>
+            <p>
+              Roles & Permissions
+            </p>
+          </a>
+        </li>
+        @endif
+        
         {{-- <li class="nav-item menu-open">
           <a href="#" class="nav-link active">
             <i class="nav-icon fas fa-users"></i>
@@ -68,12 +79,20 @@
           </ul>
         </li> --}}
 
-        @if (Auth::check())
+        @if (Auth::check() && request()->is('user/*'))
         <li class="nav-item">
           <a href="{{ route('user.dashboard') }}" class="nav-link  @if(Request::segment(2) == 'dashboard') active @endif">
             <i class="nav-icon fas fa-tachometer-alt"></i>
             <p>
               Dashboard
+            </p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="{{ route('user.tickets.index') }}" class="nav-link  @if(Request::segment(2) == 'tickets') active @endif">
+            <i class="nav-icon fas fa-ticket-alt"></i>
+            <p>
+              Tickets
             </p>
           </a>
         </li>

@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\Auth\AuthController;
 use App\Http\Controllers\DashboardController; 
 use App\Http\Controllers\Admin\RolePermissionController;
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\SupportTicket;
 
 // Admin Auth Route
 Route::prefix('admin')->name('admin.')->group(function () {
@@ -37,6 +38,11 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/admins/{id}/edit', [AdminController::class, 'edit'])->name('admins.edit');
     Route::post('/admins/edit', [AdminController::class, 'update'])->name('admins.update');
     Route::get('/admins/{id}/delete', [AdminController::class, 'delete'])->name('admins.delete');
+
+    // Ticket Routes
+    Route::get('/tickets', [SupportTicket::class, 'index'])->name('tickets.index');
+    Route::get('/tickets/{id}', [SupportTicket::class, 'show'])->name('tickets.show');
+    Route::post('/tickets/{id}/reply', [SupportTicket::class, 'reply'])->name('tickets.reply');
 });
 
 
