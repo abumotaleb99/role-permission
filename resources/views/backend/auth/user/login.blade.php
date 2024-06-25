@@ -4,12 +4,12 @@
   <div class="login-box">
     <div class="card card-primary">
       <div class="card-body">
-        <h5 class="login-box-msg pb-0" style="font-weight: bold;">Welcome Back, Admin! Let's Get Started</h5>
+        <h5 class="login-box-msg pb-0" style="font-weight: bold;">Welcome Back! Let's Get Started</h5>
         <p class="text-center text-muted pb-2">
-          Please enter your admin credentials to access the dashboard.
+          Please enter your user credentials to access the dashboard.
         </p>
         @include('backend.message')
-        <form action="{{ route('admin.login') }}" method="post">
+        <form action="{{ route('user.login') }}" method="post">
           @csrf
           <div class="mb-3">
             <div class="input-group">
@@ -48,7 +48,10 @@
           </div>
         </form>
         <p class="mb-1 mt-2">
-          <a href="{{ route('admin.forget.password.form') }}">I forgot my password</a>
+          <a href="#">I forgot my password</a>
+        </p>
+        <p class="mt-2 mb-0">
+          Don't have an account? <a href="{{ route('user.register.form') }}">Register</a>
         </p>
       </div>
     </div>

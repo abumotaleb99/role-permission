@@ -45,13 +45,33 @@
       </a>
       <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
         <a href="#" class="dropdown-item py-3">
-            <div class="text-start">
-              <h3 class="dropdown-item-title fs-5 fw-bold">{{ Auth::guard('admin')->user()->name }}</h3>
-              <p class="text-muted">{{ Auth::guard('admin')->user()->username }}</p>
-            </div>
+          <div class="text-start">
+            <h3 class="dropdown-item-title fs-5 fw-bold">
+              @if(Request::segment(1) === 'user')
+                @if (Auth::check())
+                  {{ Auth::user()->name }}
+                @endif
+              @elseif(Request::segment(1) === 'admin')
+                @if (Auth::guard('admin')->check())
+                  {{ Auth::guard('admin')->user()->name }}
+                @endif
+              @endif
+            </h3>
+            <p class="text-muted">
+              @if(Request::segment(1) === 'user')
+                @if (Auth::check())
+                  {{ Auth::user()->username }}
+                @endif
+              @elseif(Request::segment(1) === 'admin')
+                @if (Auth::guard('admin')->check())
+                  {{ Auth::guard('admin')->user()->username }}
+                @endif
+              @endif
+            </p>
+          </div>
         </a>
         <div class="dropdown-divider"></div>
-        <a href="{{ route('admin.logout') }}" class="dropdown-item text-start">
+        <a href="{{ Auth::guard('admin')->check() ? route('admin.logout') : route('user.logout') }}" class="dropdown-item text-start">
           Logout
         </a>
       </div>

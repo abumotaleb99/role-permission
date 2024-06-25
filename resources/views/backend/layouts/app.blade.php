@@ -18,21 +18,40 @@
 <body class="hold-transition sidebar-mini">
   <div class="wrapper">
     <!-- Navbar -->
-    @if(!request()->routeIs('admin.login.form') && !request()->routeIs('admin.forget.password.form') && !request()->routeIs('admin.reset.password.form'))
-      @include('backend.layouts.header')
+    @if(
+        !request()->routeIs('admin.login.form') && 
+        !request()->routeIs('admin.forget.password.form') && 
+        !request()->routeIs('admin.reset.password.form') && 
+        !request()->routeIs('user.register.form') &&
+        !request()->routeIs('user.login')
+    )
+        @include('backend.layouts.header')
     @endif
 
     <!-- Sidebar -->
-    @if(!request()->routeIs('admin.login.form') && !request()->routeIs('admin.forget.password.form') && !request()->routeIs('admin.reset.password.form'))
-      @include('backend.layouts.sidebar')
+    @if(
+        !request()->routeIs('admin.login.form') && 
+        !request()->routeIs('admin.forget.password.form') && 
+        !request()->routeIs('admin.reset.password.form') && 
+        !request()->routeIs('user.register.form') &&
+        !request()->routeIs('user.login.form')
+    )
+        @include('backend.layouts.sidebar')
     @endif
 
     @yield('content')
 
     <!-- Main Footer -->
-    @if(!request()->routeIs('admin.login.form') && !request()->routeIs('admin.forget.password.form') && !request()->routeIs('admin.reset.password.form'))
-      @include('backend.layouts.footer')
+    @if(
+        !request()->routeIs('admin.login.form') && 
+        !request()->routeIs('admin.forget.password.form') && 
+        !request()->routeIs('admin.reset.password.form') && 
+        !request()->routeIs('user.register.form') &&
+        !request()->routeIs('user.login.form')
+    )
+        @include('backend.layouts.sidebar')
     @endif
+
   </div>
   <!-- REQUIRED SCRIPTS -->
   <!-- jQuery -->
