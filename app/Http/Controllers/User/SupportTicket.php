@@ -46,9 +46,10 @@ class SupportTicket extends Controller
 
     public function show($id)
     {
-        // $ticket = Ticket::findOrFail($id);
-        $ticket = Ticket::with(['replies.user', 'replies.admin'])->findOrFail($id);
-        return view('backend.user.tickets.show', compact('ticket'));
+        $ticket = Ticket::with('user')->findOrFail($id);
+        $replies = TicketReply::with('user', 'admin')->where('ticket_id', $id)->get();
+        
+        return view('backend.user.tickets.show', compact('ticket', 'replies'));
     }
 
     public function reply(Request $request, $id) {

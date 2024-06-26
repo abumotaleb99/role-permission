@@ -36,41 +36,41 @@
                     </tr>
                   </thead>
                   <tbody>
-                  @if(count($admins) > 0)
-                  
-                  @php($i = 1)
-                  @foreach($admins as $admin)
-                    <tr>
-                      <td>{{ $i++ }}</td>
-                      <td>{{ $admin->username }}</td>
-                      <td>{{ $admin->name }}</td>
-                      <td>{{ $admin->email }}</td>
-                      <td>
-                        @foreach ($admin->roles as $role)
-                          <span class="badge badge-success">{{$role->name}}</span>
-                        @endforeach
-                      </td>
-                      <td>
-                        @if($admin->status == 0)
-                            <span class="badge badge-success">Active</span>
-                        @else
-                            <span class="badge badge-secondary">Inactive</span>
-                        @endif
-                      </td>
-                      <td>{{ date('d-m-Y H:i A', strtotime($admin->created_at)) }}</td>
-                      <td class="d-flex">
-                        @if($admin->email != 'abumotaleb1111@gmail.com')
-                          <a href="{{ url('admin/admins/' . $admin->id . '/edit') }}" class="btn btn-sm btn-primary mr-1">Edit</a>
-                          <a href="{{ url('admin/admins/' . $admin->id . '/delete') }}" onclick="return confirm('Are you sure you want to delete this Admin?')" class="btn btn-sm btn-danger">Delete</a>
-                        @endif
-                      </td>
-                    </tr>
-                  @endforeach
-                  @else
-                    <tr>
-                      <td colspan="5" class="text-center">No data found.</td>
-                    </tr>
-                  @endif
+                    @if(count($admins) > 0)
+                    
+                    @php($i = 1)
+                    @foreach($admins as $admin)
+                      <tr>
+                        <td>{{ $i++ }}</td>
+                        <td>{{ $admin->username }}</td>
+                        <td>{{ $admin->name }}</td>
+                        <td>{{ $admin->email }}</td>
+                        <td>
+                          @foreach ($admin->roles as $role)
+                            <span class="badge badge-success">{{$role->name}}</span>
+                          @endforeach
+                        </td>
+                        <td>
+                          @if($admin->status == 0)
+                              <span class="badge badge-success">Active</span>
+                          @else
+                              <span class="badge badge-secondary">Inactive</span>
+                          @endif
+                        </td>
+                        <td>{{ date('d-m-Y H:i A', strtotime($admin->created_at)) }}</td>
+                        <td class="d-flex">
+                          @if($admin->email != 'abumotaleb1111@gmail.com')
+                            <a href="{{ url('admin/admins/' . $admin->id . '/edit') }}" class="btn btn-sm btn-primary mr-1">Edit</a>
+                            <a href="{{ url('admin/admins/' . $admin->id . '/delete') }}" onclick="return confirm('Are you sure you want to delete this Admin?')" class="btn btn-sm btn-danger">Delete</a>
+                          @endif
+                        </td>
+                      </tr>
+                    @endforeach
+                    @else
+                      <tr>
+                        <td colspan="5" class="text-center">No data found.</td>
+                      </tr>
+                    @endif
                   </tbody>
                 </table>
               </div>

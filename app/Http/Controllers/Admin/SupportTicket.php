@@ -20,7 +20,8 @@ class SupportTicket extends Controller
     public function show($id)
     {
         $ticket = Ticket::with('user')->findOrFail($id);
-        $replies = TicketReply::where('ticket_id', $ticket->id);
+        $replies = TicketReply::with('user', 'admin')->where('ticket_id', $id)->get();
+        
         return view('backend.admin.tickets.show', compact('ticket', 'replies'));
     }
 
