@@ -43,6 +43,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/tickets', [SupportTicket::class, 'index'])->name('tickets.index');
     Route::get('/tickets/{id}', [SupportTicket::class, 'show'])->name('tickets.show');
     Route::post('/tickets/{id}/reply', [SupportTicket::class, 'reply'])->name('tickets.reply');
+    Route::get('/tickets/{id}/close', [SupportTicket::class, 'close'])->name('tickets.close');
 });
 
 

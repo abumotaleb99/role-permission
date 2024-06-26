@@ -50,7 +50,6 @@
                       </td>
                       <td class="d-flex">
                           <a href="{{ url('admin/tickets/' . $ticket->id) }}" class="btn btn-sm btn-primary mr-1">View Ticket</a>
-                          <a href="{{ url('admin/admins/' . $ticket->id . '/delete') }}" onclick="return confirm('Are you sure you want to delete this Admin?')" class="btn btn-sm btn-danger">Delete</a>
                       </td>
                     </tr>
                   @endforeach

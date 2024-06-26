@@ -106,6 +106,7 @@
                   </div>
                   <div class="text-right">
                       <button type="submit" class="btn btn-primary">Reply</button>
+                      <a href="{{ route('admin.tickets.close', $ticket->id) }}" class="btn btn-danger ml-2" onclick="return confirm('Are you sure you want to close this ticket?')">Close Ticket</a>
                   </div>
                 </form>
               </div>
@@ -115,4 +116,11 @@
       </div>
     </section>
   </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var chatContainer = document.querySelector('.direct-chat-messages');
+        chatContainer.scrollTop = chatContainer.scrollHeight;
+    });
+  </script>
 @endsection

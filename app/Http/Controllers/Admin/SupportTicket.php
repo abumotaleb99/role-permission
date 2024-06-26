@@ -12,7 +12,7 @@ use Carbon\Carbon;
 class SupportTicket extends Controller
 {
     public function index() {
-        $tickets = Ticket::with('user')->latest()->get();
+        $tickets = Ticket::with('user')->orderBy('created_at', 'desc')->get();
 
         return view('backend.admin.tickets.index', compact('tickets'));
     }
@@ -47,8 +47,22 @@ class SupportTicket extends Controller
 
         $reply->save();
 
+        $ticket = Ticket::findOrFail($id);
+        $ticket->status = 1;
+        $ticket->save();
+
         return redirect()->back()->with('success', 'Reply sent successfully.');
     }
+
+    public function close($id)
+    {
+        $ticket = Ticket::findOrFail($id);
+        $ticket->status = 2; 
+        $ticket->save();
+
+        return redirect('admin/tickets')->with('success', 'Ticket closed successfully.');
+    }
+
 
     // Handle Upload File Method
     private function handleUploadedFile($file) {

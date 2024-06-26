@@ -112,4 +112,11 @@
       </div>
     </section>
   </div>
+  
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var chatContainer = document.querySelector('.direct-chat-messages');
+        chatContainer.scrollTop = chatContainer.scrollHeight;
+    });
+  </script>
 @endsection
